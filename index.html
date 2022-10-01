@@ -25,36 +25,49 @@
         <div id="milisec"><span class="text-7xl">00</span></div>
       </div>
       <div class=" flex flex-row w-80 ml-auto mr-auto mt-2  justify-center justify-around">
-        <button id="start" class="bg-white px-4"><span>Start</span></button>
-        <button id="stop" class="bg-white px-4"><span>Stop</span></button>
-        <button id="reset" class="bg-white px-4"><span>Reset</span></button>
+        <button id="start"  onclick="start()" class="bg-white px-4"><span>Start</span></button>
+        <button id="stop"  onclick="stop()" class="bg-white px-4"><span>Stop</span></button>
+        <button id="reset" onclick="reset()" class="bg-white px-4"><span>Reset</span></button>
       </div>
     </div>
 
     <!-- npx tailwindcss -i src/tailwind.css -o ./styles.css --watch  -->
     <script>
         const hours = document.getElementById("hours");
-        const mins = document.getElementById("mins");
+        const minutes = document.getElementById("mins");
         const seconds = document.getElementById("seconds");
         const milisec = document.getElementById("milisec");
-        const startBtn = document.getElementById("start");
-        const stopBtn = document.getElementById("stop");
-        const resetBtn = document.getElementById("reset");
+        
+        var hrs = 0;
+        var mins =0;
+        var sec = 0;
+        var mili = 0;
 
-        startBtn.addEventListener("click",start);
+        let timer = false;
 
         function start(){
-
+            timer =true
         }
-        
+        function stop(){
+            timer = false;
+        }
+        function reset(){
+            timer = false;
+        }
 
-        console.log(hours)
-        console.log(mins)
-        console.log(seconds)
-        console.log(milisec)
-        console.log(start)
-        console.log(stop)
-        console.log(reset)
+        function stopWatch(){
+          if(timer == true){
+           document.getElementById("milisec").innerHTML = mili +1;
+             setTimeout(stopWatch,10);
+          }
+        }
+
+    
+
+
+
+       
+        
     </script>
 </body>
 </html>
