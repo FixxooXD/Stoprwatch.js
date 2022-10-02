@@ -4,18 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport", initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
     <style>
         #content-box {
-  background-image: linear-gradient(to right, #0F2027 , #203A43, #2C5364);
+          background-image: linear-gradient(to right, #F7971E, #ff6a00); 
+  
+}
+#seconds{
+  transition: all 0.2s ease; 
+}
+#header{
+  font-family: 'Zilla Slab', serif;
 }
     </style>
     <title>StopWatch</title>
 </head>
-<body>
+<body class="">
+  <div id="header-wrapper" class="flex flex-col">
+  
     <!-- content-Box -->
-    <div id="content-box" class="flex flex-col h-64 w-3/6 ml-auto mr-auto mt-28  ">
-      <div class="flex flex-row w-96 h-32 bg-white justify-center items-center ml-auto mr-auto mt-14">
+    <div id="content-box" class="flex flex-col h-64 w-3/6 ml-auto mr-auto mt-28 p-5 ">
+      <div class=" text-center  "><span class="header text-4xl font-medium tracking-wide text-white">STOPWATCH</span></div>
+      <div class="flex flex-row w-96 h-32 bg-white justify-center items-center ml-auto mr-auto mt-4  ">
         <div><span id="hours" class="text-7xl">00</span></div>
         <div><span class="text-5xl">:</span></div>
         <div><span id="mins" class="text-7xl">00</span></div>
@@ -25,20 +36,18 @@
         <div ><span id="milisec" class="text-7xl">00</span></div>
       </div>
       <div class=" flex flex-row w-80 ml-auto mr-auto mt-2  justify-center justify-around">
-        <button id="start"  onclick="start()" class="bg-white px-4"><span>Start</span></button>
-        <button id="stop"  onclick="stop()" class="bg-white px-4"><span>Stop</span></button>
-        <button id="reset" onclick="reset()" class="bg-white px-4"><span>Reset</span></button>
+        <button id="start"  onclick="start()" class="bg-white px-4 py-1 rounded  "><span >START</span></button>
+        <button id="stop"  onclick="stop()" class="bg-white px-4 py-1 rounded"><span>STOP</span></button>
+        <button id="reset" onclick="reset()" class="bg-white px-4 py-1 ease-out duration-300 hover:ease-in rounded"><span>RESET</span></button>
       </div>
+      
+    
     </div>
-
+   
+  </div>
     <!-- npx tailwindcss -i src/tailwind.css -o ./styles.css --watch  -->
     <script>
-        // const hours = document.getElementById("hours");
-        // const minutes = document.getElementById("mins");
-        // const seconds = document.getElementById("seconds");
-        // const milisec = document.getElementById("milisec");
-        console.log(milisec)
-        
+              
         var hrs = 0;
         var mins =0;
         var sec = 0;
@@ -47,7 +56,10 @@
         let timer = false;
 
         function start(){
+     
             timer =true;
+           
+
             stopWatch();
         }
         function stop(){
@@ -86,13 +98,15 @@
             mins =  0;
             sec =0;
            }
-            
+            // makeing variables to add 0 if the sec,hrs,mins is less than 10
            var secString = sec;
            var minString = mins;
            var hrString = hrs;
-
-
-
+           var miliSecs = mili;
+           if(miliSecs < 10){
+            miliSecs = "0"+miliSecs;
+           }
+           
            if(sec<10){
             secString = "0"+secString;
            }
@@ -102,11 +116,11 @@
            if(hrs<10){
             hrString ="0"+hrString;
           }
-      
+
             document.getElementById("seconds").innerHTML = secString;
             document.getElementById("hours").innerHTML = hrString;
             document.getElementById("mins").innerHTML = minString;
-            document.getElementById("milisec").innerHTML = mili;
+            document.getElementById("milisec").innerHTML = miliSecs;
            
              setTimeout(stopWatch,10);
           }
