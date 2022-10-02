@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport", initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <style>
         #content-box {
@@ -16,13 +16,13 @@
     <!-- content-Box -->
     <div id="content-box" class="flex flex-col h-64 w-3/6 ml-auto mr-auto mt-28  ">
       <div class="flex flex-row w-96 h-32 bg-white justify-center items-center ml-auto mr-auto mt-14">
-        <div id="hours"><span class="text-7xl">00</span></div>
+        <div><span id="hours" class="text-7xl">00</span></div>
         <div><span class="text-5xl">:</span></div>
-        <div id="mins"><span class="text-7xl">00</span></div>
+        <div><span id="mins" class="text-7xl">00</span></div>
         <div><span class="text-5xl">:</span></div>
-        <div id="seconds"><span class="text-7xl">00</span></div>
+        <div><span id="seconds" class="text-7xl">00</span></div>
         <div><span class="text-5xl">:</span></div>
-        <div id="milisec"><span class="text-7xl">00</span></div>
+        <div ><span id="milisec" class="text-7xl">00</span></div>
       </div>
       <div class=" flex flex-row w-80 ml-auto mr-auto mt-2  justify-center justify-around">
         <button id="start"  onclick="start()" class="bg-white px-4"><span>Start</span></button>
@@ -33,10 +33,11 @@
 
     <!-- npx tailwindcss -i src/tailwind.css -o ./styles.css --watch  -->
     <script>
-        const hours = document.getElementById("hours");
-        const minutes = document.getElementById("mins");
-        const seconds = document.getElementById("seconds");
-        const milisec = document.getElementById("milisec");
+        // const hours = document.getElementById("hours");
+        // const minutes = document.getElementById("mins");
+        // const seconds = document.getElementById("seconds");
+        // const milisec = document.getElementById("milisec");
+        console.log(milisec)
         
         var hrs = 0;
         var mins =0;
@@ -46,21 +47,71 @@
         let timer = false;
 
         function start(){
-            timer =true
+            timer =true;
+            stopWatch();
         }
         function stop(){
             timer = false;
         }
         function reset(){
             timer = false;
+            hrs = 0;
+            mins =0;
+            sec = 0;
+            mili = 0;
+
+            document.getElementById("seconds").innerHTML = "00";
+            document.getElementById("hours").innerHTML = "00";
+            document.getElementById("mins").innerHTML = "00";
+            document.getElementById("milisec").innerHTML = "00";
+          
         }
 
         function stopWatch(){
           if(timer == true){
-           document.getElementById("milisec").innerHTML = mili +1;
+             mili = mili +1;
+           
+           if(mili == 100){
+            sec = sec+1;
+            mili=0;
+        
+           }
+           if(sec == 60){
+            mins = mins +1;
+            sec  =0;
+            
+           }
+           if(mins == 60){
+            hrs = hrs +1;
+            mins =  0;
+            sec =0;
+           }
+            
+           var secString = sec;
+           var minString = mins;
+           var hrString = hrs;
+
+
+
+           if(sec<10){
+            secString = "0"+secString;
+           }
+           if(mins<10){
+            minString = "0" + minString;
+           }
+           if(hrs<10){
+            hrString ="0"+hrString;
+          }
+      
+            document.getElementById("seconds").innerHTML = secString;
+            document.getElementById("hours").innerHTML = hrString;
+            document.getElementById("mins").innerHTML = minString;
+            document.getElementById("milisec").innerHTML = mili;
+           
              setTimeout(stopWatch,10);
           }
         }
+        
 
     
 
